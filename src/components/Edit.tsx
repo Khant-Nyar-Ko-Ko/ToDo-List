@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 
-const Edit = ({ index, task, onClose, onUpdateTask }) => {
-  const [editedTask, setEditedTask] = useState(task);
+interface EditProps {
+  index: number;
+  task: string;
+  onClose: () => void;
+  onUpdateTask: (index: number, task: string) => void;
+}
 
-  const handleEditInput = (e) => {
+const Edit : React.FC<EditProps> = ({ index, task, onClose, onUpdateTask }) => {
+  const [editedTask, setEditedTask] = useState<string>(task);
+
+  const handleEditInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedTask(e.target.value);
   };
 
   const handleSave = () => {
-    onUpdateTask(index, editedTask); // Pass the updated task to the parent component
-    onClose(); // Close the Edit modal
+    onUpdateTask(index, task); 
+    onClose(); 
   };
 
   return (
