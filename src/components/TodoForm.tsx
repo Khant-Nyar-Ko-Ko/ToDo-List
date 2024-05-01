@@ -11,7 +11,7 @@ const TodoForm : React.FC<TodoFormProps> = ({ addTask }) => {
     setTask(e.target.value);
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (task.trim()) {
       addTask(task);

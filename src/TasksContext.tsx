@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useReducer } from "react";
+import { createContext, ReactNode, useReducer } from "react";
 
 type TasksContentType = {
   tasks: string[];
@@ -50,4 +50,4 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useTasks = () => useContext(TasksContext);
+
