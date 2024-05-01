@@ -1,14 +1,18 @@
-import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ tasks, setTasks }) => {
-  const handleEdit = (index, updatedTask) => {
+interface TodoListProps {
+  tasks: string[];
+  setTasks: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ tasks, setTasks }) => {
+  const handleEdit = (index: number, updatedTask: string) => {
     const updatedTasks = [...tasks];
     updatedTasks[index] = updatedTask;
     setTasks(updatedTasks);
   };
 
-  const handleDelete = (index) => {
+  const handleDelete = (index: number) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   };
@@ -20,7 +24,7 @@ const TodoList = ({ tasks, setTasks }) => {
           key={taskIndex}
           index={taskIndex} // Pass index to TodoItem
           task={task}
-          onEdit={(editedTask) => handleEdit(taskIndex, editedTask)} // Pass updated task
+          onEdit={(editedTask) => handleEdit(taskIndex, editedTask.toString())} // Convert index to string
           onDelete={() => handleDelete(taskIndex)}
         />
       ))}
