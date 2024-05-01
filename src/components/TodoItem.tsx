@@ -9,10 +9,11 @@ interface TodoItemProps {
   onDelete: (index: number) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ index, task, onEdit, onDelete }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ index, task: initialTask, onEdit, onDelete }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState(task); 
+  const [editedTask, setEditedTask] = useState(initialTask);
+  const [task, setTask] = useState(initialTask);
 
   const handleCheckbox = () => {
     setIsChecked(!isChecked);
@@ -20,7 +21,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ index, task, onEdit, onDelete }) =>
 
   const handleEditClick = () => {
     setIsEditing(true);
-    setEditedTask(task); 
+    setEditedTask(task); // Set edited task to the current task value when editing starts
   };
 
   const handleDeleteClick = () => {
@@ -29,6 +30,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ index, task, onEdit, onDelete }) =>
 
   const handleUpdateTask = () => {
     onEdit(index, editedTask);
+    setTask(editedTask); // Update the task state with the edited value
     setIsEditing(false);
   };
 
@@ -48,7 +50,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ index, task, onEdit, onDelete }) =>
             className="text-black"
           />
         ) : (
-          <h3 className={`text-white ${isChecked && "line-through"}`}>{editedTask}</h3>
+          <h3 className={`text-white ${isChecked && "line-through"}`}>{task}</h3>
         )}
       </div>
       <div className="flex gap-3">
